@@ -8,8 +8,8 @@ COVERAGE_PRIMER = 2.5
 PREP_COST = 50
 LABOR_COST_PER_HOUR = 200
 LABOR_COVERAGE = 1.5
-OVERHEAD_FACTOR = 1.05
-PROFIT_MARGIN = 1.55
+OVERHEAD_FACTOR = 1.15
+PROFIT_MARGIN = 1.50
 FIELD_WORK_EXTRA = 2900
 
 def calculate_price(length, height, depth, fpi, include_primer, is_field_work):
@@ -113,3 +113,4 @@ if st.button("חשב הצעת מחיר ₪", type="primary", use_container_width
             
     else:
         st.error("נא להזין מידות תקינות (גדולות מ-0)")
+
