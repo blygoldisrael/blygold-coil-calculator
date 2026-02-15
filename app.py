@@ -96,8 +96,8 @@ col_logo, col_title = st.columns([1, 3])
 
 with col_logo:
     # וודא שהקובץ logo.png קיים בתיקייה הראשית בגיטהב
-    if os.path.exists("logo.png"):
-        st.image("logo.png", width=150)
+    if os.path.exists("Logo.png"):
+        st.image("Logo.png", width=150)
     else:
         st.write("🔧") # אייקון חלופי אם אין תמונה
 
@@ -123,7 +123,7 @@ with col2:
 st.write("") # מרווח
 st.markdown("### אפשרויות מתקדמות")
 include_primer = st.checkbox("כולל ציפוי קשתות (פריימר)?")
-location = st.radio("מיקום ביצוע העבודה:", ["בית מלאכה", "שטח (באתר הלקוח)"])
+location = st.radio("מיקום ביצוע העבודה:", ["בית מלאכה ", "שטח (באתר הלקוח)"])
 is_field_work = location == "שטח (באתר הלקוח)"
 
 st.write("")
@@ -154,3 +154,4 @@ if st.button("חשב הצעת מחיר", type="primary"):
              st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
         st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
+
