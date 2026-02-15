@@ -92,15 +92,18 @@ st.markdown("""
 # כותרת ולוגו
 # ==========================================
 # נסיון לטעון לוגו, אם לא קיים מציג טקסט
-with col_logo:
-    # כתובת הלוגו מהאתר הרשמי (או כל קישור אחר לתמונה)
-    logo_url = "https://www.blygold.com/wp-content/uploads/2020/05/Blygold-Logo.png"
-    
-    try:
-        st.image(logo_url, width=150)
-    except:
-        st.write("🔧") # אייקון גיבוי אם התמונה לא נטענת
+col_logo, col_title = st.columns([1, 3])
 
+with col_logo:
+    # וודא שהקובץ logo.png קיים בתיקייה הראשית בגיטהב
+    if os.path.exists("logo.png"):
+        st.image("logo.png", width=150)
+    else:
+        st.write("🔧") # אייקון חלופי אם אין תמונה
+
+with col_title:
+    st.title("מחשבון ציפוי סוללות")
+    st.markdown("**Blygold HVAC Protection**")
 with col_title:
     st.title("מחשבון ציפוי סוללות")
     st.markdown("**Blygold HVAC Protection**")
@@ -154,6 +157,7 @@ if st.button("חשב הצעת מחיר", type="primary"):
              st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
         st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
+
 
 
 
