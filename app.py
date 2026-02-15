@@ -97,7 +97,7 @@ col_logo, col_title = st.columns([1, 3])
 with col_logo:
     # וודא שהקובץ logo.png קיים בתיקייה הראשית בגיטהב
     if os.path.exists("Logo.png"):
-        st.image(".streamlit/Logo.png", width=150)
+        st.image("streamlit/Logo.png", width=150)
     else:
         st.write("🔧") # אייקון חלופי אם אין תמונה
 
@@ -154,6 +154,7 @@ if st.button("חשב הצעת מחיר", type="primary"):
              st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
         st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
+
 
 
 
