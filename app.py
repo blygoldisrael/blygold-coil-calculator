@@ -20,7 +20,7 @@ FIELD_WORK_EXTRA = 2900.0
 # לוגיקת החישוב
 # ==========================================
 def calculate_exact_price(length_m, height_m, depth_m, fpi, include_primer, is_field_work):
-    # תיקון חישוב צפיפות עלים למטר לפי הנוסחה החדשה
+    # תיקון חישוב צפיפות עלים למטר לפי הנוסחה: (FPI / 2.5) * 100
     fins_per_meter = (fpi / 2.5) * 100
     
     coated_area = length_m * height_m * depth_m * fins_per_meter * 2
@@ -44,6 +44,7 @@ def calculate_exact_price(length_m, height_m, depth_m, fpi, include_primer, is_f
     price_excl_field = total_cost_per_coil + profit
     
     final_price = price_excl_field
+    # הוספת תוספת שטח אם נבחר
     if is_field_work:
         final_price += FIELD_WORK_EXTRA
         
@@ -95,13 +96,12 @@ st.markdown("""
 col_logo, col_title = st.columns([1, 3])
 
 with col_logo:
-    # טעינת הלוגו מהנתיב המעודכן
+    # טעינת לוגו מהנתיב המעודכן
     logo_path = ".devcontainer/Logo.png"
-    
     if os.path.exists(logo_path):
         st.image(logo_path, width=150)
     else:
-        st.write("🔧") # אייקון חלופי אם אין תמונה
+        st.write("🔧")
 
 with col_title:
     st.title("מחשבון ציפוי סוללות")
@@ -124,9 +124,15 @@ with col2:
 
 st.write("") # מרווח
 st.markdown("### אפשרויות מתקדמות")
+
 include_primer = st.checkbox("כולל ציפוי קשתות (פריימר)?")
-location = st.radio("מיקום ביצוע העבודה:", ["בית מלאכה ", "ציפוי באתר הלקוח)"])
-is_field_work = location == "שטח (באתר הלקוח)"
+
+# === התיקון כאן: הגדרת משתנים לטקסטים כדי למנוע טעויות ===
+OPTION_WORKSHOP = "ביצוע בבית מלאכה"
+OPTION_FIELD = "ביצוע באתר הלקוח (תוספת תשלום)"
+
+location = st.radio("מיקום ביצוע העבודה:", [OPTION_WORKSHOP, OPTION_FIELD])
+is_field_work = (location == OPTION_FIELD)
 
 st.write("")
 # ==========================================
@@ -156,3 +162,5 @@ if st.button("חשב מחיר משוער", type="primary"):
              st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
         st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
+        if is_field_work:
+            st.write(f"🔹 **תוספת עבודת שטח:** {FIELD_WORK_EXTRA} ₪")
