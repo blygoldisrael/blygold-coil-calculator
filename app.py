@@ -153,14 +153,3 @@ if st.button("חשב מחיר משוער", type="primary"):
     """, unsafe_allow_html=True)
     
     st.write("")
-    
-    # פירוט טכני מוסתר
-    with st.expander("📝 פירוט נתונים טכניים (לשימוש פנימי)"):
-        st.write(f"🔹 **שטח לציפוי (Coated Area):** {res['coated_area']:.2f} מ\"ר")
-        st.write(f"🔹 **עלות חומר גלם:** {res['cost_polual']:.2f} ₪")
-        if include_primer:
-             st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
-        st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
-        st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
-        if is_field_work:
-            st.write(f"🔹 **תוספת עבודת שטח:** {FIELD_WORK_EXTRA} ₪")
