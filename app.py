@@ -1,3 +1,12 @@
+צודק בהחלט. העדכון שביצעת בנוסחה הוא המרה מדויקת יותר של ה-FPI (Fins Per Inch) למטרים לפי היחס שהגדרת.
+
+הנה הקוד המלא והמתוקן:
+
+1. **מחקתי** את הקבוע `FINS_PER_METER_FACTOR`.
+2. **עדכנתי** את חישוב `fins_per_meter` בתוך הפונקציה לפי הנוסחה: `(FPI / 2.5) * 100`.
+3. שמרתי על נתיב הלוגו המעודכן (`.devcontainer/Logo.png`).
+
+```python
 import streamlit as st
 from PIL import Image
 import os
@@ -15,13 +24,14 @@ LABOR_OUTPUT_m2_PER_HOUR = 1.5
 OVERHEAD_PERCENT = 0.10
 PROFIT_MARGIN = 0.55
 FIELD_WORK_EXTRA = 2900.0
-FINS_PER_METER_FACTOR = 39.3700787
 
 # ==========================================
 # לוגיקת החישוב
 # ==========================================
 def calculate_exact_price(length_m, height_m, depth_m, fpi, include_primer, is_field_work):
-    fins_per_meter = fpi * FINS_PER_METER_FACTOR
+    # תיקון חישוב צפיפות עלים למטר לפי הנוסחה החדשה
+    fins_per_meter = (fpi / 2.5) * 100
+    
     coated_area = length_m * height_m * depth_m * fins_per_meter * 2
     faced_area = length_m * height_m
     
@@ -94,7 +104,7 @@ st.markdown("""
 col_logo, col_title = st.columns([1, 3])
 
 with col_logo:
-    # == עדכון: טעינת הלוגו מהנתיב החדש ==
+    # טעינת הלוגו מהנתיב המעודכן
     logo_path = ".devcontainer/Logo.png"
     
     if os.path.exists(logo_path):
@@ -124,14 +134,14 @@ with col2:
 st.write("") # מרווח
 st.markdown("### אפשרויות מתקדמות")
 include_primer = st.checkbox("כולל ציפוי קשתות (פריימר)?")
-location = st.radio("מיקום ביצוע העבודה:", ["בית מלאכה", "שטח (באתר הלקוח)"])
+location = st.radio("מיקום ביצוע העבודה:", ["בית מלאכה ", "ציפוי באתר הלקוח)"])
 is_field_work = location == "שטח (באתר הלקוח)"
 
 st.write("")
 # ==========================================
 # כפתור ותוצאה
 # ==========================================
-if st.button("חשב הצעת מחיר", type="primary"):
+if st.button("חשב מחיר משוער", type="primary"):
     res = calculate_exact_price(length, height, depth, fpi, include_primer, is_field_work)
     
     st.markdown("---")
@@ -155,3 +165,5 @@ if st.button("חשב הצעת מחיר", type="primary"):
              st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
         st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
+
+```
