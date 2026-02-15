@@ -104,9 +104,6 @@ with col_logo:
 with col_title:
     st.title("מחשבון ציפוי סוללות")
     st.markdown("**Blygold HVAC Protection**")
-with col_title:
-    st.title("מחשבון ציפוי סוללות")
-    st.markdown("**Blygold HVAC Protection**")
 
 st.divider()
 
@@ -133,7 +130,7 @@ st.write("")
 # ==========================================
 # כפתור ותוצאה
 # ==========================================
-if st.button("חשב הצעת מחיר", type="primary"):
+if st.button("חשב מחיר משוער", type="primary"):
     res = calculate_exact_price(length, height, depth, fpi, include_primer, is_field_work)
     
     st.markdown("---")
@@ -157,6 +154,7 @@ if st.button("חשב הצעת מחיר", type="primary"):
              st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
         st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
+
 
 
 
