@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#FEC300"    # הצבע הצהוב של בלייגולד (לכפתורים וסליידרים)
+backgroundColor = "#FFFFFF" # רקע לבן נקי
+secondaryBackgroundColor = "#F0F2F6" # רקע אפור בהיר (לתיבות צדדיות)
+textColor = "#000000"       # צבע טקסט כהה וקריא
+font = "sans serif"
