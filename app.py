@@ -91,13 +91,14 @@ st.markdown("""
 # ==========================================
 # כותרת ולוגו
 # ==========================================
-# נסיון לטעון לוגו, אם לא קיים מציג טקסט
 col_logo, col_title = st.columns([1, 3])
 
 with col_logo:
-    # וודא שהקובץ logo.png קיים בתיקייה הראשית בגיטהב
-    if os.path.exists("logo.png"):
-        st.image("logo.png", width=150)
+    # == עדכון: טעינת הלוגו מהנתיב החדש ==
+    logo_path = ".devcontainer/Logo.png"
+    
+    if os.path.exists(logo_path):
+        st.image(logo_path, width=150)
     else:
         st.write("🔧") # אייקון חלופי אם אין תמונה
 
@@ -108,57 +109,4 @@ with col_title:
 st.divider()
 
 # ==========================================
-# טופס קלט
-# ==========================================
-col1, col2 = st.columns(2)
-
-with col1:
-    height = st.number_input("גובה (מטרים)", min_value=0.0, value=1.0, step=0.1, format="%.2f")
-    depth = st.number_input("עומק (מטרים)", min_value=0.0, value=0.13, step=0.01, format="%.3f")
-
-with col2:
-    length = st.number_input("אורך (מטרים)", min_value=0.0, value=1.0, step=0.1, format="%.2f")
-    fpi = st.number_input("צפיפות (FPI)", min_value=1, value=10, step=1)
-
-st.write("") # מרווח
-st.markdown("### אפשרויות מתקדמות")
-include_primer = st.checkbox("כולל ציפוי קשתות (פריימר)?")
-location = st.radio("מיקום ביצוע העבודה:", ["בית מלאכה ", "ציפוי באתר הלקוח)"])
-is_field_work = location == "שטח (באתר הלקוח)"
-
-st.write("")
-# ==========================================
-# כפתור ותוצאה
-# ==========================================
-if st.button("חשב מחיר משוער", type="primary"):
-    res = calculate_exact_price(length, height, depth, fpi, include_primer, is_field_work)
-    
-    st.markdown("---")
-    
-    # הצגת התוצאה בתוך "קופסה" מעוצבת
-    st.markdown(f"""
-    <div class="result-box">
-        <h2 style="margin:0; color:#333;">סה"כ להצעת מחיר</h2>
-        <h1 style="margin:0; color:#0055A5; font-size: 50px;">{res['final_price']:,} ₪</h1>
-        <p style="margin-top:10px; color:#666;">המחיר אינו כולל מע"מ</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.write("")
-    
-    # פירוט טכני מוסתר
-    with st.expander("📝 פירוט נתונים טכניים (לשימוש פנימי)"):
-        st.write(f"🔹 **שטח לציפוי (Coated Area):** {res['coated_area']:.2f} מ\"ר")
-        st.write(f"🔹 **עלות חומר גלם:** {res['cost_polual']:.2f} ₪")
-        if include_primer:
-             st.write(f"🔹 **עלות פריימר:** {res['cost_primer']:.2f} ₪")
-        st.write(f"🔹 **עלות עבודה:** {res['cost_labor']:.2f} ₪")
-        st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
-
-
-
-
-
-
-
-
+# טופס ק
