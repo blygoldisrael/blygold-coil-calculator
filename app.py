@@ -1,12 +1,3 @@
-צודק בהחלט. העדכון שביצעת בנוסחה הוא המרה מדויקת יותר של ה-FPI (Fins Per Inch) למטרים לפי היחס שהגדרת.
-
-הנה הקוד המלא והמתוקן:
-
-1. **מחקתי** את הקבוע `FINS_PER_METER_FACTOR`.
-2. **עדכנתי** את חישוב `fins_per_meter` בתוך הפונקציה לפי הנוסחה: `(FPI / 2.5) * 100`.
-3. שמרתי על נתיב הלוגו המעודכן (`.devcontainer/Logo.png`).
-
-```python
 import streamlit as st
 from PIL import Image
 import os
@@ -167,3 +158,4 @@ if st.button("חשב מחיר משוער", type="primary"):
         st.write(f"🔹 **סה\"כ עלות ישירה (לפני רווח):** {res['total_cost_per_coil']:.2f} ₪")
 
 ```
+
