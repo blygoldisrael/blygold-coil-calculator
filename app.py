@@ -10,7 +10,7 @@ PRICE_PER_KG_PRIMER = 96.74
 PREP_COST = 50.0
 COVERAGE_POLUAL = 0.05
 COVERAGE_PRIMER = 2.5
-LABOR_COST_PER_HOUR = 100.0
+LABOR_COST_PER_HOUR = 200.0
 LABOR_OUTPUT_m2_PER_HOUR = 1.5
 OVERHEAD_PERCENT = 0.10
 PROFIT_MARGIN = 0.55
@@ -153,4 +153,5 @@ if st.button("חשב מחיר משוער", type="primary"):
     """, unsafe_allow_html=True)
     
     st.write("")
+
 
